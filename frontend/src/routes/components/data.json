@@ -1,0 +1,51 @@
+[
+    {
+      "id": 1,
+      "name": "Intel Core i9-13900K",
+      "type": "CPU",
+      "price": "$599",
+      "description": "High-performance processor for gaming and productivity."
+    },
+    {
+      "id": 2,
+      "name": "AMD Ryzen 9 7950X",
+      "type": "CPU",
+      "price": "$699",
+      "description": "16-core, 32-thread powerhouse for multitasking."
+    },
+    {
+      "id": 3,
+      "name": "Corsair Vengeance LPX 32GB",
+      "type": "Memory",
+      "price": "$129",
+      "description": "DDR4 RAM with high-speed performance."
+    },
+    {
+      "id": 4,
+      "name": "Samsung 970 EVO Plus 1TB",
+      "type": "SSD",
+      "price": "$129",
+      "description": "NVMe SSD with blazing-fast read/write speeds."
+    },
+    {
+      "id": 5,
+      "name": "NVIDIA GeForce RTX 4090",
+      "type": "GPU",
+      "price": "$1599",
+      "description": "Flagship GPU for 4K gaming and ray tracing."
+    },
+    {
+      "id": 6,
+      "name": "ASUS ROG Strix Z790-E",
+      "type": "Motherboard",
+      "price": "$499",
+      "description": "High-end motherboard for Intel 13th Gen processors."
+    },
+    {
+      "id": 7,
+      "name": "Noctua NH-D15",
+      "type": "Cooler",
+      "price": "$99",
+      "description": "Premium air cooler for efficient CPU cooling."
+    }
+  ]
