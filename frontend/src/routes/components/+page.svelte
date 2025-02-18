@@ -13,7 +13,28 @@
   );
 </script>
 
+<div class="container">
+    <div class="search-bar">
+        <input
+            type="text"
+            placeholder="Search components..."
+            bind:value={searchQuery}
+        />
+    </div>
   
+    <div class="cards">
+        {#each filteredComponents as component}
+            <div class="card">
+                <h2>{component.name}</h2>
+                <p><strong>Type:</strong> {component.type}</p>
+                <p><strong>Price:</strong> <span class="price">{component.price}</span></p>
+                <p>{component.description}</p>
+            </div>
+        {/each}
+    </div>
+</div>
+
+
   <style>
     .container {
       max-width: 1200px;
@@ -60,25 +81,4 @@
       font-weight: bold;
       color: #000;
     }
-  </style>
-  
-  <div class="container">
-    <div class="search-bar">
-      <input
-        type="text"
-        placeholder="Search components..."
-        bind:value={searchQuery}
-      />
-    </div>
-  
-    <div class="cards">
-      {#each filteredComponents as component}
-        <div class="card">
-          <h2>{component.name}</h2>
-          <p><strong>Type:</strong> {component.type}</p>
-          <p><strong>Price:</strong> <span class="price">{component.price}</span></p>
-          <p>{component.description}</p>
-        </div>
-      {/each}
-    </div>
-  </div>
+</style>

@@ -1,15 +1,35 @@
 @import 'tailwindcss';
 
-@font-face {
-    font-family: Poppins;
-    src: url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@layer base {
+    @font-face {
+        font-family: 'Dinish';
+        src: url('/fonts/DINish-Black.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Dinish Light';
+        src: url('/fonts/DINish-Light.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Dinish Condensed Black';
+        src: url('/fonts/DINishCondensed-Black.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Dinish Condensed Light';
+        src: url('/fonts/DINishCondensed-Light.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
 }
-
-@font-face {
-    font-family: Montserrat;
-    src: url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Slab:wght@100..900&display=swap');
-}
-
 
 :root {
     --white: #fff;
@@ -21,7 +41,7 @@
     --border-radius: 16px;
 
     --heading-font: "Dinish", sans-serif;
-    --body-font: "Montserrat", sans-serif;
+    --body-font: 'Montserrat Variable', sans-serif;
     --bold: 700;
 
     --h1-size: clamp(48px, 7.031vw, 180px);

@@ -1,36 +1,22 @@
-<script>
-</script>
-
-<header class="fixed top-0 left-0 w-full max-w-screen py-8 px-0 will-change-transform mix-blend-difference pointer-events-none z-1000">
-    <div class="w-full max-w-screen ml-auto mr-auto py-4 px-12 flex justify-between">
-
-        <div class="header-logo">
-            <a href="/" aria-label="Go to homepage">
-                <span class="font-bold">RIGCRAFT</span>
-            </a>
+<header class="fixed top-0 left-0 w-full max-w-screen p-4 will-change-transform mix-blend-difference z-1000 pointer-events-none">
+    <div class="header-contaienr w-full max-w-screen flex justify-between mx-4 my-7 px-4">
+        
+		<div class="header-logo">
+            <a href="/"><span class="cursor-default pointer-events-auto font-[Anton] text-4xl">Rigcraft</span></a>
         </div>
 
-        <nav class="flex justify-end items-center uppercase font-bold">
-            <div class="relative pointer-events-auto">
+		<nav class="flex justify-end items-center uppercase font-bold mx-8">
+            <div class="nav-wrapper relative pointer-events-auto">
+
                 <div class="borders-left"></div>
                 <div class="borders-right"></div>
 
-                <ul class="header-nav flex m-0 p-0 ms-0 me-0 px-4">
-                    <li>
-                        <div><a href="/about">About</a></div>
-                    </li>
-                    <li>
-                        <div><a href="/projects">Projects</a></div>
-                    </li>
-                    <li>
-                        <div><a href="/news">News</a></div>
-                    </li>
-                    <li>
-                        <div><a href="/contact">Contact</a></div>
-                    </li>
-                    <li>
-                        <div><a href="/carrers">Carrers</a></div>
-                    </li>
+                <ul class="nav-container flex px-5">
+                    <li class="nav-items"><a href="/components">Explore</a></li>
+                    <li class="nav-items"><a href="/builds">Builds</a></li>
+                    <li class="nav-items"><a href="/forums">Forums</a></li>
+                    <li class="nav-items"><a href="/support">Support</a></li>
+                    <li class="nav-items"><a href="/user">Login</a></li>
                 </ul>
 
             </div>
@@ -39,29 +25,33 @@
     </div>
 </header>
 
-
 <style>
+	/* header, .header-logo{
+		outline: 1px solid #fff;
+	} */
+
     :root {
-        --menu-border-width: 0.45rem;
-    }
-
-    .header-logo > a > span {
-        /* font-size: clamp(48px, 8vw, 180px); */
-        font-size: 2dvw;
-    }
-
-    .borders-left, .borders-right {
-        opacity: 0.625;
-        pointer-events: none;
+        --border-width: 0.4rem;
     }
 
     .borders-left::before, .borders-left::after,
     .borders-right::before, .borders-right::after {
         content: "";
-        height: var(--menu-border-width);
-        width: var(--menu-border-width);
+        height: var(--border-width);
+        width: var(--border-width);
         position: absolute;
         display: block;
+    }
+
+    .nav-wrapper .borders-left,
+    .nav-wrapper .borders-right {
+        opacity: 0.6;
+        transition: opacity 0.8s var(--expo-out);
+    }
+
+    .nav-wrapper:hover .borders-left,
+    .nav-wrapper:hover .borders-right {
+        opacity: 0.4; 
     }
 
     .borders-left::before {
@@ -92,26 +82,39 @@
         bottom: 0px;
     }
 
-
-    .header-nav {
-        margin-block-start: .2em;
-        margin-block-end: .2em;
-
-        li {
-            margin: 0 1rem;
+    .nav-container {
+        .nav-items {
             position: relative;
+            margin: 0.3rem 1rem;
         }
 
-        li > div > a {
+        .nav-items > a {
             color: var(--white);
             font-size: 1.2em;
             line-height: 1.5;
-            letter-spacing: 0.0125em;
+            letter-spacing: 0.0125;
             pointer-events: auto;
             display: block;
-            opacity: 1;
-            transition: opacity 1s var(--expo-out);
-            text-decoration: none;
+            font-family: 'Dinish Light';
+            /* margin-inline-start: 1rem;
+            margin-inline-end: 1rem; */
+        }
+
+        .nav-items > a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: 10%;
+            left: 0;
+            background-color: var(--white);
+            transition: transform 1s var(--expo-out);
+            transform-origin: bottom left;
+        }
+        .nav-items:hover > a::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
         }
     }
 </style>
