@@ -3,6 +3,7 @@
     import Comps from "./home/Crafts.svelte";
 	import Footer from "$lib/Footer.svelte";
 	import Features from "./home/Features.svelte";
+	import BuildSlides from "./home/BuildSlides.svelte";
 </script>
 
 <div class="site-wrapper">
@@ -11,6 +12,7 @@
             <Hero />
             <Comps />
             <Features />
+            <BuildSlides />
         </div>
     </main>
     <Footer />
