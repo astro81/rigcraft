@@ -61,6 +61,7 @@
 	},
 	"dependencies": {
 		"@fontsource-variable/montserrat": "^5.1.1",
-		"@fontsource/anton": "^5.1.1"
+		"@fontsource/anton": "^5.1.1",
+		"gsap": "^3.12.7"
 	}
 }

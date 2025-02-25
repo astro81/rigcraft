@@ -1,2 +1,4 @@
 npm install @fontsource/anton
 npm install @fontsource-variable/montserrat
+
+npm i gsap

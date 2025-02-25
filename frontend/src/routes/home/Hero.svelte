@@ -15,7 +15,7 @@ aria-label="Landing Page"
                 <div>Compare the performances.</div>
             </div>
             <div class="line-parent">
-                <div>Start your PC-building journey today</div>
+                <div>Start your PC-building journey today.</div>
             </div>
         </h1>
     </div>
@@ -30,10 +30,5 @@ aria-label="Landing Page"
     .line-parent {
         display: block; text-align: start; position: relative;
     }
-
-    /* .seperator {
-        display: block; 
-        height: calc(100% - 2px);
-    } */
 
 </style>
