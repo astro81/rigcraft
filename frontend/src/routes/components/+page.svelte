@@ -1,25 +1,28 @@
 <script>
-    import { ComponentCpuStore } from "$lib/stores/component-store.svelte.js";
-    import ComponentCard from "./ComponentCard.svelte";
+    import { CategoryStore } from "$lib/stores/category-store.svelte.js";
+	import CategoryCard from "./CategoryCard.svelte";
+
 </script>
 
-<section class="w-full">
-    <div class="w-full h-full flex justify-center items-center">
-        <div class="mt-36 w-full px-40">
-            <div class="cards">
-                {#each ComponentCpuStore as component}
-                    <ComponentCard {...component} />
+<section class="w-screen h-fit">
+    <div class="w-full flex justify-center items-center absolute top-0 left-0 outline-1">
+        <div class="max-w-[90%] w-full h-full flex justify-center items-center mt-36 overflow-hidden">
+            
+            <div class="container">
+                {#each CategoryStore as category}
+                    <CategoryCard {...category}/>
                 {/each}
+
             </div>
+
         </div>
     </div>
 </section>
 
 <style>
-    .cards {
+    .container {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 1.5rem;
-        padding: 2rem;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        justify-content: center;
     }
 </style>
