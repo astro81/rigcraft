@@ -3,7 +3,7 @@
 	import '@fontsource/anton';
 	import '@fontsource-variable/montserrat';
 
-	import Navbar from '$lib/Navbar.svelte';
+	import Navbar from '$lib/components/Navbar.svelte';
 
 	let { children } = $props();
 </script>

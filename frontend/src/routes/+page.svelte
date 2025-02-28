@@ -1,7 +1,7 @@
 <script>
     import Hero from "./home/Hero.svelte";
     import Comps from "./home/Crafts.svelte";
-	import Footer from "$lib/Footer.svelte";
+	import Footer from "$lib/components/Footer.svelte";
 	import Features from "./home/Features.svelte";
 	import BuildSlides from "./home/BuildSlides.svelte";
 </script>
