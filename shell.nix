@@ -13,7 +13,7 @@ pkgs.mkShellNoCC {
   	MESSAGE = "Welcome to the Nix Shell Environment for your Django project in ${toString (builtins.getEnv "PWD")}";
 
   	#! Additional dependencies for the project
-  	DEPENDENCIES = "django icecream djangorestframework django-cors-headers pillow";
+  	DEPENDENCIES = "django icecream djangorestframework django-cors-headers pillow djangorestframework-simplejwt";
 
   	shellHook = ''
   	  	echo "$MESSAGE"
