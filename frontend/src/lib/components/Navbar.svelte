@@ -1,4 +1,6 @@
 <script>
+	import { userDataStore } from "$lib/stores/user-store.svelte";
+
     let isOpen = $state(false);
 </script>
 
@@ -36,7 +38,11 @@
                             <li class="nav-item"><a href="/builds">Builds</a></li>
                             <li class="nav-item"><a href="/forums">Forums</a></li>
                             <li class="nav-item"><a href="/support">Support</a></li>
-                            <li class="nav-item"><a href="/user">Login</a></li>
+                            {#if userDataStore.username && userDataStore.isLoggedIn}
+                                <li class="nav-item"><a href="/users/{userDataStore.username}">{userDataStore.username}</a></li>
+                            {:else}
+                                <li class="nav-item"><a href="/users/login">Login</a></li>
+                            {/if}
                         </ul>
                     </div>
                 </div>

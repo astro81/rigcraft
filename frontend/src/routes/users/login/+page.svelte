@@ -1,3 +1,4 @@
+<!-- /users/login -->
 <script>
 	import { goto } from "$app/navigation";
 	import { userDataStore } from "$lib/stores/user-store.svelte.js";
@@ -37,6 +38,8 @@
 			console.error('Fetch error:', error);
 		}
 	};
+
+	// console.log("login username: " + userDataStore.username, userDataStore.isLoggedIn);
 </script>
 
 <section class="w-screen h-screen flex justify-center items-center">
@@ -64,7 +67,7 @@
 		</form>
 
 		<p class="mt-4">
-			Don't have an account? <a href="/user/register" class="text-blue-500">Register here</a>.
+			Don't have an account? <a href="/users/register" class="text-blue-400">Register here</a>.
 		</p>
 	</div>
 </section>

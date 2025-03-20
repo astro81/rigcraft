@@ -1,3 +1,4 @@
+<!-- /users/[user_name]/ -->
 <script>
 	import { userDataStore } from '$lib/stores/user-store.svelte';
 
@@ -8,8 +9,8 @@
     let username = userDataStore.username;
     let loginStatus = userDataStore.isLoggedIn;
 
-    $inspect(username);
-    $inspect(loginStatus);
+    // $inspect(username);
+    // $inspect(loginStatus);
 </script>
 
 <!-- <h1>{data.username}</h1> -->

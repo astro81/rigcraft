@@ -1,3 +1,5 @@
+ <!-- /users/register -->
+
 <script>
 	import { goto } from "$app/navigation";
 	import { preventDefault } from "svelte/legacy";
@@ -32,7 +34,7 @@
 
 			if (response.status === 201) {
 				// Redirect to login page on successful registration
-				goto('/user/login');
+				goto('/users/login');
 				// todo: display success popup
 			} else {
 				// Display errors from the backend
@@ -69,6 +71,8 @@
             </div>  
 
             <button type="submit" class="outline-1 rounded-[4px] px-3 py-1frontend/src/routes/users/register/+page.svelte">Register</button>
+
+            <p class="text-center">Already have an account? <a class="text-blue-400" href="/users/login">Login</a></p>
         </form>
     </div>
 </section>
