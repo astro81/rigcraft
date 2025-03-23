@@ -41,7 +41,7 @@
                             {#if userDataStore.username && userDataStore.isLoggedIn}
                                 <li class="nav-item"><a href="/users/{userDataStore.username}">{userDataStore.username}</a></li>
                             {:else}
-                                <li class="nav-item"><a href="/users/login">Login</a></li>
+                                <li class="nav-item"><a href="/users/">Login</a></li>
                             {/if}
                         </ul>
                     </div>

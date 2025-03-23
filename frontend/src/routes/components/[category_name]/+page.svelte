@@ -33,7 +33,7 @@
                         <h1 class="text-5xl font-normal">{category.component_category_title}</h1>
                         <h1 class="text-xl font-normal mt-2 opacity-60">{category.component_category_sub_title}</h1>
                     {:else}
-                        <p>The category does not exis {data.component_category_name}</p>
+                        <p>The category does not exist {data.component_category_name}</p>
                     {/if}
                 </div>
             </div>

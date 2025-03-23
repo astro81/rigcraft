@@ -4,4 +4,4 @@ export const userDataStore = $state({
     isLoggedIn: false,
 });
 
-console.log(userDataStore.username);
+
