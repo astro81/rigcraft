@@ -166,3 +166,4 @@ class AccountDeletionAPIView(APIView):
                 'message': 'Failed to delete account',
                 'errors': serializer.errors
             }, status=status.HTTP_400_BAD_REQUEST)
+

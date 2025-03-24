@@ -34,3 +34,4 @@ class ComponentCategoryModel(models.Model):
             str: The name of the category.
         """
         return self.component_category_name
+

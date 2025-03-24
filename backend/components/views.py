@@ -43,3 +43,4 @@ class ComponentGpuViewSet(ComponentBaseViewSet):
     queryset = ComponentGpuModel.objects.all()
     serializer_class = ComponentGpuSerializer
     name_field = 'component_gpu_name'             #* Use the name field for lookup
+

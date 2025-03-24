@@ -23,7 +23,7 @@ class ComponentMemorySerializer(serializers.ModelSerializer):
         model = ComponentMemoryModel
         fields = (
 			'component_memory_id',
-   			'component_memory_name',
+            'component_memory_name',
 			'component_memory_producer',
 			'component_memory_model',
 			'component_memory_type',
@@ -49,3 +49,4 @@ class ComponentGpuSerializer(serializers.ModelSerializer):
             'component_gpu_price',
             'component_gpu_image'
         )
+

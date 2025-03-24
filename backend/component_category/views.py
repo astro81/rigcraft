@@ -48,3 +48,4 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
         # Fall back to the default behavior (retrieve by `id`)
         return super().get_object()
+    

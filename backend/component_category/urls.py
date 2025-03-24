@@ -5,3 +5,4 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 router.register('component_category', CategoryViewSet, basename = 'category')
 urlpatterns = router.urls
+

@@ -34,7 +34,7 @@
 
                     <div class="nav-wrapper" class:isOpen>
                         <ul class="nav-items flex gap-8 z-100">
-                            <li class="nav-item"><a href="/components">Explore</a></li>
+                            <li class="nav-item"><a href="/categories">Explore</a></li>
                             <li class="nav-item"><a href="/builds">Builds</a></li>
                             <li class="nav-item"><a href="/forums">Forums</a></li>
                             <li class="nav-item"><a href="/support">Support</a></li>

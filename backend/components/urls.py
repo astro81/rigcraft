@@ -9,3 +9,4 @@ router.register('components/memory', ComponentMemoryViewSet, basename = 'memory'
 router.register('components/gpu', ComponentGpuViewSet, basename = 'gpu')
 
 urlpatterns = router.urls
+
