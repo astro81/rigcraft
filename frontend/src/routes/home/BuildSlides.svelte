@@ -27,13 +27,13 @@
         const rightCards = document.querySelectorAll(".right .item");
 
         const translateImage = (target, p) => {
-          target.style.transform = `translate3d(${p.x}rem, 0, ${p.z}rem)`;
+            target.style.transform = `translate3d(${p.x}rem, 0, ${p.z}rem)`;
         };
         
         const animateCards = (c, perspectives) => {
-          const count = parseInt(c.dataset.counter);
-          translateImage(c, perspectives[count - 1]);
-          c.dataset.counter = (count === 7 ? 1 : count + 1).toString();
+            const count = parseInt(c.dataset.counter);
+            translateImage(c, perspectives[count - 1]);
+            c.dataset.counter = (count === 7 ? 1 : count + 1).toString();
         };
         
         const interval = setInterval(() => {
@@ -51,10 +51,10 @@
 </script>
 
 <section>
-    <div class="w-full h-[105vh] relative px-12">
+    <div class="w-full h-[90vh] relative px-12">
 
         <div class="flex flex-col justify-start items-center px-1 py-2">
-            <h1 class="text-[clamp(24px,_2.5vw,_64px)] m-0">Explore Amazing Builds</h1>
+            <h1 class="text-[clamp(38px,_3.5vw,_74px)] m-0">Explore Amazing Builds</h1>
             <h2 class="text-xl mt-1 opacity-70">Find your ture Craft, A place with limitless possiblities</h2>
         </div>
 

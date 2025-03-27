@@ -1,3 +1,4 @@
+<!-- ComponentListPage -->
 <script>
     import ComponentList from './ComponentList.svelte';
 

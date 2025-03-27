@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'component_category',
     'components',
     'users',
+    'builds',
 ]
 
 MIDDLEWARE = [

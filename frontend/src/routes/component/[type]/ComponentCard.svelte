@@ -1,5 +1,6 @@
+<!-- ComponentCard -->
 <script>
-    import { componentTypeMap } from './componentService';
+    import { componentTypeMap } from '$lib/apis/component-api';
 
     // Component props
     let { component, componentType } = $props();

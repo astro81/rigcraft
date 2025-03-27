@@ -1,9 +1,9 @@
 <script>
     import { onMount } from 'svelte';
-    import { componentTypeMap, fetchComponentDetail } from '../componentService';
+    import { componentTypeMap, fetchComponentDetail } from '../../../../lib/apis/component-api';
     import { componentDetailConfig } from './componentDetailConfig';
-    import LoadingSpinner from '../LoadingSpinner.svelte';
-    import ErrorMessage from '../ErrorMessage.svelte';
+    import LoadingSpinner from '../../../../lib/components/LoadingSpinner.svelte';
+    import ErrorMessage from '../../../../lib/components/ErrorMessage.svelte';
     import ComponentDetailSection from './ComponentDetailSection.svelte';
 
     // Component props

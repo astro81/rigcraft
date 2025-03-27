@@ -1,155 +1,153 @@
-from users.serializers import UserRegistrationSerializer, UserLoginSerializer, UserProfileSerializer
+# users/views.py
 from rest_framework.generics import CreateAPIView, RetrieveUpdateAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from users.models import UserProfile
-from users.serializers import UserRegistrationSerializer, AccountDeletionSerializer
-import os, shutil
-from icecream import ic
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.exceptions import TokenError
+
+from django.contrib.auth.models import User
+from .models import UserProfile
+from .serializers import (
+    UserRegistrationSerializer, 
+    UserLoginSerializer, 
+    UserProfileSerializer, 
+    AccountDeletionSerializer
+)
+
+import os
+import shutil
+import logging
+
+logger = logging.getLogger(__name__)
 
 class RegistrationAPIView(CreateAPIView):
     """
-    *API view for user registration with profile information.
+    *API view for user registration with comprehensive handling.
     
-    *This view allows any user to register by providing username, password, and optional
-    *profile information like first name, last name, email, profile picture, and bio.
+    Allows user registration with profile information and token generation.
     """
     serializer_class = UserRegistrationSerializer
     permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
+        """
+        *Handle user registration process.
+        
+        Args:
+            request: Incoming HTTP request
+        
+        Returns:
+            Response: Registration response with tokens and user data
+        """
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
         
-        #* Generate tokens after successful registration
-        refresh = RefreshToken.for_user(user)
+        try:
+            serializer.is_valid(raise_exception=True)
+            user = serializer.save()
+                        
+            return Response({
+                'message': 'User registered successfully',
+                'user': serializer.data
+            }, status=status.HTTP_201_CREATED)
         
-        return Response({
-            'message': 'User registered successfully',
-            'access_token': str(refresh.access_token),
-            'refresh_token': str(refresh),
-            'user': serializer.data
-        }, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            logger.error(f"Registration Error: {str(e)}")
+            return Response({
+                'message': 'Registration failed',
+                'errors': serializer.errors
+            }, status=status.HTTP_400_BAD_REQUEST)
+
 
 class UserLoginAPIView(APIView):
     """
-    *API view for user login.
-    
-    *This view authenticates the user and returns JWT tokens if the credentials are valid.
+    *API view for user login with secure token generation.
     """
     serializer_class = UserLoginSerializer
-    
+    permission_classes = [AllowAny]
+
     def post(self, request):
-        serializer = UserLoginSerializer(data=request.data)
+        """
+        *Handle user login process.
         
-        if serializer.is_valid():
-            #* fetch the access token and refresh token from the serializer
-            access_token: str =  serializer.validated_data['access']
-            refresh_token: str = serializer.validated_data['refresh']
+        Args:
+            request: Incoming HTTP request
+        
+        Returns:
+            Response: Login response with tokens
+        """
+        serializer = self.serializer_class(data=request.data)
+        
+        try:
+            serializer.is_valid(raise_exception=True)
             
             return Response({
                 'message': 'Login successful',
-                'access_token': access_token,
-                'refresh_token': refresh_token,
+                'access_token': serializer.validated_data['access'],
+                'refresh_token': serializer.validated_data['refresh'],
             }, status=status.HTTP_200_OK)
-        else:
-            return Response({
-                'message': 'Invalid credentials',
-                'errors': serializer.errors,
-            }, status=status.HTTP_401_UNAUTHORIZED)
-
-
-class UserLogoutAPIView(APIView):
-    """
-    *API view for user logout.
-    
-    *This view blacklists the refresh token to log out the user.
-    """
-    def post(self, request):
-        try:
-            refresh_token = request.data.get('refresh_token')
-            
-            ic(refresh_token)
-            
-            if not refresh_token:
-                return Response({
-                    'message': 'Refresh token is required.',
-                }, status=status.HTTP_400_BAD_REQUEST)
-
-            try:
-                token = RefreshToken(refresh_token)
-
-                token.blacklist()
-
-                return Response({
-                    'message': 'Logout successful',
-                }, status=status.HTTP_200_OK)
-            except Exception as token_error:
-                return Response({
-                    'message': 'Token processing error',
-                    'error': str(token_error)
-                }, status=status.HTTP_400_BAD_REQUEST)
-
+        
         except Exception as e:
-            # General error handler
+            logger.error(f"Login Error: {str(e)}")
             return Response({
-                'message': 'Invalid token',
-                'error': str(e)
-            }, status=status.HTTP_400_BAD_REQUEST)
+                'message': 'Login failed',
+                'errors': serializer.errors
+            }, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class UserProfileAPIView(RetrieveUpdateAPIView):
     """
-    *API view for retrieving and updating the authenticated user's profile.
+    *API view for retrieving and updating user profiles.
     """
     serializer_class = UserProfileSerializer
-    permission_classes = [IsAuthenticated]  #! Only authenticated users can access this view
+    permission_classes = [IsAuthenticated]
 
     def get_object(self):
+        """
+        *Retrieve or create user profile.
+        
+        Returns:
+            UserProfile: User's profile instance
+        """
         try:
-            #* Return the UserProfile instance for the authenticated user
             return self.request.user.profile
         except UserProfile.DoesNotExist:
-            #* If the profile does not exist, create it
             return UserProfile.objects.create(user=self.request.user)
 
 
 class AccountDeletionAPIView(APIView):
     """
-    *API view for user account deletion.
-    
-    *This view deletes the user account after password verification.
+    *API view for secure account deletion.
     """
     permission_classes = [IsAuthenticated]
     
     def post(self, request):
-        serializer = AccountDeletionSerializer(data=request.data, context={'user': request.user})
+        """
+        *Handle account deletion process.
+        
+        Args:
+            request: Incoming HTTP request
+        
+        Returns:
+            Response: Account deletion status
+        """
+        serializer = AccountDeletionSerializer(
+            data=request.data, 
+            context={'user': request.user}
+        )
         
         if serializer.is_valid():
             user = request.user
             
             try:
-                # Get the profile to access file paths
                 profile = user.profile
                 
-                # Delete profile picture if it exists and isn't the default
-                if profile.profile_picture and not profile.profile_picture.name.endswith('default_profile.png'):
-                    # Get the directory path
-                    user_dir = os.path.dirname(profile.profile_picture.path)
-                    
-                    # Delete the file
-                    if os.path.exists(profile.profile_picture.path):
-                        os.remove(profile.profile_picture.path)
-                    
-                    # Delete the user directory if it exists
-                    if os.path.exists(user_dir) and os.path.basename(user_dir).startswith('user_'):
-                        shutil.rmtree(user_dir)
+                # Delete profile picture safely
+                if (profile.profile_picture) and ('default_profile.png' not in profile.profile_picture.name):
+                    self._delete_profile_picture(profile)
                 
-                # Delete the user (this will cascade to the profile as well)
+                # Delete user account
                 user.delete()
                 
                 return Response({
@@ -157,13 +155,89 @@ class AccountDeletionAPIView(APIView):
                 }, status=status.HTTP_200_OK)
                 
             except Exception as e:
+                logger.error(f"Account Deletion Error: {str(e)}")
                 return Response({
                     'message': 'Failed to delete account',
                     'error': str(e)
                 }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        else:
+        
+        return Response({
+            'message': 'Account deletion failed',
+            'errors': serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
+    
+    def _delete_profile_picture(self, profile):
+        """
+        *Safely delete user's profile picture.
+        
+        Args:
+            profile (UserProfile): User profile instance
+        """
+        try:
+            picture_path = profile.profile_picture.path
+            user_dir = os.path.dirname(picture_path)
+            
+            if os.path.exists(picture_path):
+                os.remove(picture_path)
+            
+            if os.path.exists(user_dir) and os.path.basename(user_dir).startswith('user_'):
+                shutil.rmtree(user_dir)
+        
+        except Exception as e:
+            logger.warning(f"Profile picture deletion error: {str(e)}")
+
+
+class UserLogoutAPIView(APIView):
+    """
+    *API view for user logout with secure token handling.
+    
+    Handles user logout by blacklisting the refresh token.
+    """
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, request):
+        """
+        *Handle user logout process.
+        
+        Expects a refresh token in the request body.
+        Blacklists the refresh token to invalidate the user's session.
+        
+        Args:
+            request: Incoming HTTP request with refresh token
+        
+        Returns:
+            Response: Logout status
+        """
+        try:
+            # Get refresh token from request
+            refresh_token = request.data.get('refresh_token')
+            
+            # Validate refresh token presence
+            if not refresh_token:
+                return Response({
+                    'message': 'Refresh token is required'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            try:
+                # Attempt to blacklist the token
+                token = RefreshToken(refresh_token)
+                token.blacklist()
+                
+                return Response({
+                    'message': 'Logout successful'
+                }, status=status.HTTP_200_OK)
+            
+            except TokenError:
+                # Handle invalid token scenarios
+                return Response({
+                    'message': 'Invalid or expired token'
+                }, status=status.HTTP_400_BAD_REQUEST)
+        
+        except Exception as e:
+            # Log unexpected errors
+            logger.error(f"Logout Error: {str(e)}")
             return Response({
-                'message': 'Failed to delete account',
-                'errors': serializer.errors
-            }, status=status.HTTP_400_BAD_REQUEST)
+                'message': 'Logout failed',
+                'error': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 

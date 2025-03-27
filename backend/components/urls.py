@@ -1,3 +1,4 @@
+# components.urls
 from django.urls import path
 from components.views import ComponentCpuViewSet, ComponentMemoryViewSet, ComponentGpuViewSet
 from rest_framework.routers import DefaultRouter

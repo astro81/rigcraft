@@ -1,3 +1,4 @@
+<!-- /component/[type] -->
 <script>
     import ComponentListPage from "./ComponentListPage.svelte";
 

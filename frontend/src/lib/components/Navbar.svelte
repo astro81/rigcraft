@@ -11,8 +11,8 @@
             <a href="/"><span class="cursor-default pointer-events-auto font-[Anton] text-4xl">Rigcraft</span></a>
         </div>
 
-		<nav class="flex justify-end items-center uppercase font-bold pointer-events-auto">
-            <div class="nav-container grid grid-rows-[0.3fr_1fr_0.3fr] grid-cols-[0.4rem_repeat(3,_1fr)_0.4rem] gap-x-6 gap-y-0 grid-flow-row">  <!--  An = 3 + { ((n-1)n) / 2 }, Bn = 4 + (n-1)n -->
+		<nav class="flex justify-end items-center uppercase font-bold pointer-events-auto mr-8">
+            <div class="nav-container grid grid-rows-[0.3fr_1fr_0.3fr] grid-cols-[0.4rem_repeat(3,_1fr)_0.4rem] gap-x-6 gap-y-0 grid-flow-row"> 
                 
                 <div class="menu-corner tl border-l border-t"></div>
                 <div class="menu-corner bl border-l border-b"></div>
@@ -34,14 +34,13 @@
 
                     <div class="nav-wrapper" class:isOpen>
                         <ul class="nav-items flex gap-8 z-100">
+                            <li class="nav-item"><a href="/">Home</a></li>
                             <li class="nav-item"><a href="/categories">Explore</a></li>
                             <li class="nav-item"><a href="/builds">Builds</a></li>
-                            <li class="nav-item"><a href="/forums">Forums</a></li>
-                            <li class="nav-item"><a href="/support">Support</a></li>
                             {#if userDataStore.username && userDataStore.isLoggedIn}
-                                <li class="nav-item"><a href="/users/{userDataStore.username}">{userDataStore.username}</a></li>
+                                <li class="nav-item"><a href="/users/profile/{userDataStore.username}">{userDataStore.username}</a></li>
                             {:else}
-                                <li class="nav-item"><a href="/users/">Login</a></li>
+                                <li class="nav-item"><a href="/users/login">Login</a></li>
                             {/if}
                         </ul>
                     </div>

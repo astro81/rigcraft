@@ -1,3 +1,4 @@
+# components.models
 from django.db import models
 
 class ComponentCpuModel(models.Model):
@@ -103,3 +104,4 @@ class ComponentGpuModel(models.Model):
         if not self.component_gpu_name:  # Only generate component_gpu_name if it's not already set
             self.component_gpu_name = f"{self.component_gpu_brand} {self.component_gpu_model} {self.component_gpu_series}"
         super().save(*args, **kwargs)
+

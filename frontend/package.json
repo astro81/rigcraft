@@ -43,6 +43,7 @@
 		"@fontsource-variable/montserrat": "^5.2.5",
 		"@fontsource/anton": "^5.2.5",
 		"axios": "^1.8.4",
-		"gsap": "^3.12.7"
+		"gsap": "^3.12.7",
+		"svelte-sonner": "^0.3.28"
 	}
 }

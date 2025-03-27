@@ -1,9 +1,10 @@
+<!-- ComponentList -->
 <script>
     import { onMount } from 'svelte';
-    import { fetchComponents } from './componentService';
+    import { fetchComponents } from '$lib/apis/component-api';
     import ComponentCard from './ComponentCard.svelte';
-    import LoadingSpinner from './LoadingSpinner.svelte';
-    import ErrorMessage from './ErrorMessage.svelte';
+    import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
+    import ErrorMessage from '$lib/components/ErrorMessage.svelte';
 
     // Component props
     let { componentType } = $props();

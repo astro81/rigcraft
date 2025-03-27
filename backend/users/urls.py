@@ -1,3 +1,4 @@
+# users.urls
 from django.urls import path
 from users.views import (
     RegistrationAPIView, 
@@ -14,3 +15,4 @@ urlpatterns = [
     path('profile/', UserProfileAPIView.as_view(), name='profile'),  
     path('delete-account/', AccountDeletionAPIView.as_view(), name='delete-account'),
 ]
+

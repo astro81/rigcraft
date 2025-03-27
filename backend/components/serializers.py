@@ -1,3 +1,4 @@
+# components.serializers
 from rest_framework import serializers
 from components.models import ComponentCpuModel, ComponentMemoryModel, ComponentGpuModel
 
