@@ -1,6 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { toast } from 'svelte-sonner'; 
+    import { goto } from '$app/navigation';
 
     import { categories, initializeCategories } from "$lib/stores/category-store.svelte";
     import { fetchComponents } from "$lib/apis/component-api";
@@ -94,6 +95,9 @@
 
             toast.success('Build saved successfully!');
             alert("Build saved");
+
+            // Redirect to the build details page
+            // goto(`/builds/${savedBuild.id}`);
 
             // reset the build store
             buildStoreData.cpu = null;

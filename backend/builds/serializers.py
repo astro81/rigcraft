@@ -17,4 +17,3 @@ class BuildSerializer(serializers.ModelSerializer):
         user = self.context.get('request').user
         validated_data['user'] = user
         return super().create(validated_data)
-
