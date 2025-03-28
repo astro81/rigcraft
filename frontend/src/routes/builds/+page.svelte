@@ -83,37 +83,27 @@
 
         try {
             const buildData = {
-                cpu_id: selectedComponents.cpu.component_cpu_id,
-                memory_id: selectedComponents.memory.component_memory_id,
-                gpu_id: selectedComponents.gpu.component_gpu_id
+                cpu: selectedComponents.cpu.component_cpu_id,
+                memory: selectedComponents.memory.component_memory_id,
+                gpu: selectedComponents.gpu.component_gpu_id
             };
+
+            console.log('Sending build data:', buildData); // Log the data being sent
 
             const savedBuild = await createBuild(buildData, access_token);
 
             toast.success('Build saved successfully!');
             alert("Build saved");
 
-            // todo: reset the build store
+            // reset the build store
+            buildStoreData.cpu = null;
+            buildStoreData.memory = null;
+            buildStoreData.gpu = null;
 
         } catch (err) {
-            console.error('Error saving build:', err);
-
-            if (err.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                if (err.response.status === 401) {
-                    toast.error('Authentication failed. Please log in again.');
-                    // Optionally redirect to login page
-                } else {
-                    toast.error(`Failed to save build: ${err.response.data.detail || 'Unknown error'}`);
-                }
-            } else if (err.request) {
-                // The request was made but no response was received
-                toast.error('No response from server. Check your network connection.');
-            } else {
-                // Something happened in setting up the request that triggered an Error
-                toast.error('Error setting up the request');
-            }
+            console.error('Full error object:', err);
+            console.error('Error response:', err.response);
+            toast.error(`Failed to save build: ${err.response?.data?.detail || err.message}`);
         }
 
     }

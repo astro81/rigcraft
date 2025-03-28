@@ -10,12 +10,12 @@ export async function createBuild(buildData, access_token) {
     }
 
     try {
-        const response = await axios.post(`${API_BASE_URL}/builds/`, {buildData}, {
+        const response = await axios.post(`${API_BASE_URL}/builds/`, buildData, {
             headers: {
-                'Authorization': `Bearer ${access_token}` // Ensure 'Bearer ' prefix
+                'Authorization': `Bearer ${access_token}`,
+                'Content-Type': 'application/json'
             }
         });
-        // console.log(response);
         return response.data;
     } catch (error) {
         console.error('Full error response:', error.response);
@@ -24,14 +24,13 @@ export async function createBuild(buildData, access_token) {
 }
 
 // Fetch user builds
-export async function fetchUserBuilds() {
-    const response = await axios.get(`${API_BASE_URL}/builds/`);
-    return response.data;
-}
+// export async function fetchUserBuilds() {
+//     const response = await axios.get(`${API_BASE_URL}/builds/`);
+//     return response.data;
+// }
 
-// Get a specific build by ID
-export async function fetchBuildDetail(buildId) {
-    const response = await axios.get(`${API_BASE_URL}/builds/${buildId}/`);
-    return response.data;
-}
-
+// // Get a specific build by ID
+// export async function fetchBuildDetail(buildId) {
+//     const response = await axios.get(`${API_BASE_URL}/builds/${buildId}/`);
+//     return response.data;
+// }
