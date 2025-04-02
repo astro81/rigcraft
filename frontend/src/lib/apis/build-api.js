@@ -23,14 +23,23 @@ export async function createBuild(buildData, access_token) {
     }
 }
 
-// Fetch user builds
-// export async function fetchUserBuilds() {
-//     const response = await axios.get(`${API_BASE_URL}/builds/`);
-//     return response.data;
-// }
+export async function fetchUserBuilds(build_Id, access_token) {
+    if (!access_token) {
+        console.error('No authentication token found');
+        throw new Error('Authentication token is missing');
+    }
 
-// // Get a specific build by ID
-// export async function fetchBuildDetail(buildId) {
-//     const response = await axios.get(`${API_BASE_URL}/builds/${buildId}/`);
-//     return response.data;
-// }
+    try {
+        const response = await axios.get(`${API_BASE_URL}/builds/${build_Id}/`, {
+            headers: {
+                'Authorization': `Bearer ${access_token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Full error response:', error.response);
+        throw error;
+    }
+}
+

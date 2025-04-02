@@ -89,15 +89,13 @@
                 gpu: selectedComponents.gpu.component_gpu_id
             };
 
-            console.log('Sending build data:', buildData); // Log the data being sent
-
             const savedBuild = await createBuild(buildData, access_token);
 
             toast.success('Build saved successfully!');
             alert("Build saved");
 
             // Redirect to the build details page
-            // goto(`/builds/${savedBuild.id}`);
+            goto(`/builds/${savedBuild.id}`);
 
             // reset the build store
             buildStoreData.cpu = null;
